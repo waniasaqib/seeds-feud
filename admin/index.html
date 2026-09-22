@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Game Studio · Family Feud Admin</title>
+  <meta name="theme-color" content="#061824">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin">
+  <div class="bg" aria-hidden="true">
+    <div class="bg-glow"></div>
+    <svg class="deco deco-tr" viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" /><circle cx="100" cy="100" r="66" /><circle cx="100" cy="100" r="45" /></svg>
+    <svg class="deco deco-bl" viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" /><circle cx="100" cy="100" r="66" /><circle cx="100" cy="100" r="45" /></svg>
+  </div>
+
+  <header class="a-header">
+    <div class="a-brand">
+      <img src="../assets/img/mark.png" alt="" class="a-mark">
+      <div>
+        <p class="a-kicker">Seeds Congress</p>
+        <h1>Game Studio</h1>
+      </div>
+    </div>
+    <div class="a-header-actions">
+      <span class="save-state" id="saveState"><i></i><span>All changes saved</span></span>
+      <a class="btn btn-primary" href="../" id="openGame">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <span>Open game</span>
+      </a>
+    </div>
+  </header>
+
+  <nav class="a-tabs" id="tabs" role="tablist">
+    <button role="tab" data-tab="questions" class="on" type="button">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 9h10M7 13h6"/></svg>
+      Questions <b id="qCount"></b>
+    </button>
+    <button role="tab" data-tab="teams" type="button">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.4"/><path d="M3 19c.8-3.4 3.2-5 6-5s5.2 1.6 6 5M15 14.5c2.6-.3 4.8 1 5.6 4.5"/></svg>
+      Teams
+    </button>
+    <button role="tab" data-tab="branding" type="button">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>
+      Look &amp; Feel
+    </button>
+    <button role="tab" data-tab="settings" type="button">
+      <svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
+      Rules
+    </button>
+    <button role="tab" data-tab="data" type="button">
+      <svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+      Save &amp; Share
+    </button>
+  </nav>
+
+  <div class="a-layout">
+    <main class="a-main">
+
+      <!-- QUESTIONS -->
+      <section class="panel on" data-panel="questions">
+        <div class="panel-head">
+          <div>
+            <h2>Survey questions</h2>
+            <p>Each question needs <b>5–8 answers</b>. The board ranks them by points automatically, so type them in any order.</p>
+          </div>
+          <button class="btn btn-primary" id="addQ" type="button">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6"><path d="M12 5v14M5 12h14"/></svg>
+            Add question
+          </button>
+        </div>
+        <div class="q-list" id="qList"></div>
+        <button class="add-q-big" id="addQ2" type="button">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          Add another question
+        </button>
+      </section>
+
+      <!-- TEAMS -->
+      <section class="panel" data-panel="teams">
+        <div class="panel-head">
+          <div>
+            <h2>Teams</h2>
+            <p>Name your two families and give each one a signature colour.</p>
+          </div>
+        </div>
+        <div class="team-editors" id="teamEditors"></div>
+      </section>
+
+      <!-- BRANDING -->
+      <section class="panel" data-panel="branding">
+        <div class="panel-head">
+          <div>
+            <h2>Look &amp; feel</h2>
+            <p>Titles, logo and colours shown on the title screen and game board.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Title screen text</h3>
+          <div class="fields">
+            <label class="field">
+              <span>Game title</span>
+              <input type="text" data-bind="branding.title" maxlength="40" placeholder="Family Feud">
+              <small>Every other word glows green.</small>
+            </label>
+            <label class="field">
+              <span>Edition badge</span>
+              <input type="text" data-bind="branding.edition" maxlength="60" placeholder="Seeds Congress 2026 Edition">
+            </label>
+            <label class="field wide">
+              <span>Tagline</span>
+              <input type="text" data-bind="branding.tagline" maxlength="120">
+            </label>
+            <label class="field wide">
+              <span>Line above each question</span>
+              <input type="text" data-bind="branding.surveyLabel" maxlength="80" placeholder="We surveyed 100 delegates…">
+            </label>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Logo</h3>
+          <div class="logo-choices" id="logoChoices">
+            <label class="logo-opt">
+              <input type="radio" name="logo" value="horizontal">
+              <span class="logo-prev"><img src="../assets/img/logo-h.png" alt=""></span>
+              <b>Horizontal</b>
+            </label>
+            <label class="logo-opt">
+              <input type="radio" name="logo" value="vertical">
+              <span class="logo-prev"><img src="../assets/img/logo-v.png" alt=""></span>
+              <b>Stacked</b>
+            </label>
+            <label class="logo-opt">
+              <input type="radio" name="logo" value="custom">
+              <span class="logo-prev" id="customLogoPrev"><em>Upload</em></span>
+              <b>Your own</b>
+            </label>
+            <label class="logo-opt">
+              <input type="radio" name="logo" value="none">
+              <span class="logo-prev"><em>No logo</em></span>
+              <b>None</b>
+            </label>
+          </div>
+          <input type="file" id="logoFile" accept="image/png,image/jpeg,image/svg+xml,image/webp" hidden>
+          <p class="hint">Custom logos work best as a transparent PNG with light artwork. Max 1.5 MB.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>Colours</h3>
+            <button class="link-btn" id="resetColors" type="button">Reset to Congress palette</button>
+          </div>
+          <div class="colors" id="themeColors"></div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="panel" data-panel="settings">
+        <div class="panel-head">
+          <div>
+            <h2>Rules &amp; options</h2>
+            <p>Tweak how the game plays.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="setting">
+            <div>
+              <b>Strikes before a steal</b>
+              <p>Classic Family Feud uses 3.</p>
+            </div>
+            <div class="seg" id="strikeSeg"></div>
+          </div>
+          <div class="setting">
+            <div>
+              <b>Sound effects</b>
+              <p>Dings, buzzers and fanfares.</p>
+            </div>
+            <label class="switch"><input type="checkbox" data-bind="settings.sound"><span></span></label>
+          </div>
+          <div class="setting">
+            <div>
+              <b>Show point values on the board</b>
+              <p>Turn off to only show the answer text.</p>
+            </div>
+            <label class="switch"><input type="checkbox" data-bind="settings.showPoints"><span></span></label>
+          </div>
+        </div>
+
+        <div class="card how">
+          <h3>How a round plays</h3>
+          <ol class="steps">
+            <li><b>Face-off.</b> One player from each team answers. Tap their answers on the board, then pick which team won — they choose to <i>play</i> or <i>pass</i>.</li>
+            <li><b>Play.</b> The team in control keeps guessing. Tap correct answers to reveal them; press <kbd class="kbd">X</kbd> for a strike.</li>
+            <li><b>Steal.</b> After the last strike, the other team gets one guess. Tap it if it's right, or hit “Steal failed”.</li>
+            <li><b>End of round.</b> The pot (× the round multiplier) goes to the winner. Reveal the rest and move on.</li>
+          </ol>
+          <p class="hint">Tip: open <b>Board display</b> from the host menu to put a clean, controls-free board on a projector while you run the game from your laptop or phone.</p>
+        </div>
+
+        <div class="card danger-card">
+          <div class="setting">
+            <div>
+              <b>Reset the current game</b>
+              <p>Clears scores and sends everyone back to the title screen. Questions are kept.</p>
+            </div>
+            <button class="btn btn-danger" id="resetGame" type="button">Reset game</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- DATA -->
+      <section class="panel" data-panel="data">
+        <div class="panel-head">
+          <div>
+            <h2>Save &amp; share</h2>
+            <p>Edits save automatically in <b>this browser</b>. Use these tools to move them to another device or make them the default for everyone.</p>
+          </div>
+        </div>
+        <div class="data-grid">
+          <button class="data-card" id="exportBtn" type="button">
+            <svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+            <b>Download content.json</b>
+            <span>A backup of every question, team and setting.</span>
+          </button>
+          <button class="data-card" id="importBtn" type="button">
+            <svg viewBox="0 0 24 24"><path d="M12 21V9M7 14l5-5 5 5"/><path d="M4 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"/></svg>
+            <b>Import a file</b>
+            <span>Load a content.json you downloaded earlier.</span>
+          </button>
+          <button class="data-card" id="copyBtn" type="button">
+            <svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+            <b>Copy as text</b>
+            <span>Paste it into a message or a new device.</span>
+          </button>
+          <button class="data-card" id="pasteBtn" type="button">
+            <svg viewBox="0 0 24 24"><path d="M9 4h6v3H9z"/><path d="M15 5h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2"/></svg>
+            <b>Paste text</b>
+            <span>Load content copied from another device.</span>
+          </button>
+        </div>
+        <input type="file" id="importFile" accept="application/json,.json" hidden>
+
+        <div class="card">
+          <h3>Make it the default for everyone</h3>
+          <p class="hint">Download <code>content.json</code> and replace the file with the same name at the top of the website's GitHub repository. Everyone who opens the game without their own edits will then see your version.</p>
+        </div>
+
+        <div class="card danger-card">
+          <div class="setting">
+            <div>
+              <b>Discard my edits</b>
+              <p>Go back to the published questions and settings.</p>
+            </div>
+            <button class="btn btn-danger" id="resetAll" type="button">Reset content</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="a-preview" aria-label="Live preview">
+      <div class="preview-head">
+        <span><i></i>Live preview</span>
+        <div class="preview-actions">
+          <select id="previewQ" aria-label="Question to preview"></select>
+        </div>
+      </div>
+      <div class="preview-frame">
+        <iframe id="preview" title="Game preview" src="../?view=board&amp;preview=1" tabindex="-1"></iframe>
+      </div>
+      <p class="preview-note">Shows the board as players see it, with every answer revealed.</p>
+    </aside>
+  </div>
+
+  <!-- Paste dialog -->
+  <div class="modal" id="pasteModal" role="dialog" aria-modal="true">
+    <div class="modal-card wide">
+      <h2>Paste content</h2>
+      <p class="modal-sub">Paste the text you copied from “Copy as text”.</p>
+      <textarea id="pasteArea" rows="8" spellcheck="false"></textarea>
+      <div class="modal-actions">
+        <button class="btn btn-primary btn-lg" id="pasteGo" type="button">Load it</button>
+        <button class="btn btn-ghost btn-lg" id="pasteCancel" type="button">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm -->
+  <div class="modal" id="confirm" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h2 id="confirmTitle"></h2>
+      <p class="modal-sub" id="confirmText"></p>
+      <div class="modal-actions">
+        <button class="btn btn-danger btn-lg" id="confirmYes" type="button">Yes</button>
+        <button class="btn btn-ghost btn-lg" id="confirmNo" type="button">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="../assets/js/defaults.js"></script>
+  <script src="../assets/js/store.js"></script>
+  <script src="../assets/js/admin.js"></script>
+</body>
+</html>
