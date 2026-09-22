@@ -659,7 +659,7 @@
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.target.closest('input, textarea, select')) return;
+      if (e.target.closest && e.target.closest('input, textarea, select')) return;
       if (e.metaKey || e.ctrlKey || e.altKey) {
         if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); act.undo(); }
         return;

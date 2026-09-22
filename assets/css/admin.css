@@ -93,7 +93,7 @@
   background: radial-gradient(circle at 35% 30%, #c7ecd0, var(--accent-2) 45%, var(--accent));
   box-shadow: 0 0 0 4px rgba(6, 24, 36, 0.8), 0 0 0 5.5px color-mix(in srgb, var(--accent) 40%, transparent);
 }
-.q-text { font-size: 1.08rem !important; font-weight: 700 !important; min-height: 50px; }
+.q-text { font-size: 1.08rem !important; font-weight: 700 !important; min-height: 50px; overflow: hidden; resize: none !important; }
 .q-tools { display: flex; gap: 4px; }
 .q-tools button {
   width: 36px; height: 36px; border-radius: 10px; border: 0; cursor: pointer; display: grid; place-items: center;
@@ -238,6 +238,7 @@
   .a-preview { position: relative; top: 0; order: -1; max-width: 640px; width: 100%; margin: 0 auto; }
 }
 @media (max-width: 720px) {
+  .a-preview { order: 1; }
   .a-header { padding-bottom: 8px; }
   .a-mark { height: 38px; }
   .save-state span { display: none; }

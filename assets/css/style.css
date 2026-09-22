@@ -531,13 +531,13 @@ body[data-phase="intro"] .dock, body[data-phase="gameOver"] .dock { display: non
 .stepper button { width: 34px; height: 34px; border-radius: 10px; border: 0; cursor: pointer; background: rgba(255, 255, 255, 0.08); font-weight: 800; font-size: 0.8rem; }
 .stepper button:hover { background: rgba(255, 255, 255, 0.16); }
 .stepper input { width: 64px; height: 34px; text-align: center; border-radius: 10px; border: 0; background: rgba(0, 0, 0, 0.3); color: #fff; font: 800 1rem var(--font); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12); }
-.jump-list { display: grid; gap: 6px; }
+.jump-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; }
 .jump-btn { display: flex; gap: 10px; align-items: center; text-align: left; padding: 10px 12px; border-radius: 12px; border: 0; cursor: pointer; background: rgba(255, 255, 255, 0.04); font-size: 0.84rem; font-weight: 600; }
 .jump-btn:hover { background: rgba(255, 255, 255, 0.09); }
 .jump-btn.now { background: color-mix(in srgb, var(--accent) 18%, transparent); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--accent) 55%, transparent); }
 .jump-btn i { font-style: normal; flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 0.75rem; font-weight: 900; background: rgba(255, 255, 255, 0.1); }
 .jump-btn.now i { background: var(--accent); color: #04131d; }
-.jump-btn span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.jump-btn span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .drawer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .tool-btn { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 14px; border-radius: 14px; border: 0; cursor: pointer; text-decoration: none; background: rgba(255, 255, 255, 0.05); font-size: 0.84rem; font-weight: 700; text-align: left; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06); }
 .tool-btn:hover { background: rgba(255, 255, 255, 0.1); }
@@ -575,9 +575,10 @@ body[data-phase="intro"] .dock, body[data-phase="gameOver"] .dock { display: non
   .team-top { justify-content: flex-start; grid-column: 1; }
   .team-name { grid-column: 1; margin: 2px 0 0; }
   .team-score { grid-column: 2; grid-row: 1 / span 2; font-size: clamp(2rem, 7vw, 3rem); }
-  .team-chip { position: absolute; top: 10px; right: 12px; height: auto; margin: 0; }
+  .team-score { grid-row: 1 / span 3; }
+  .team-chip { grid-column: 1; height: auto; margin: 0; justify-content: flex-start; }
+  .team-chip:not(:empty) { margin-top: 6px; }
   .team-chip span { padding: 3px 8px; font-size: 0.58rem; }
-  .team.is-active .team-chip ~ .team-score, .team.is-stealing .team-score { margin-top: 16px; }
   .team.is-active, .team.is-stealing { transform: none; }
 }
 

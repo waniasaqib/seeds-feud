@@ -125,6 +125,12 @@
     '</article>';
   }
 
+  function grow(ta) {
+    ta.style.height = 'auto';
+    ta.style.height = ta.scrollHeight + 3 + 'px';
+  }
+  addEventListener('resize', () => $$('.q-text', qList).forEach(grow));
+
   function updateBadges(card) {
     const q = content.questions[+card.dataset.qi];
     const filled = q.answers.filter((a) => a.text.trim());
@@ -144,6 +150,7 @@
       ? content.questions.map((q, i) => questionHTML(q, i, total)).join('')
       : '<div class="empty">No questions yet. Add your first survey question!</div>';
     $$('.q-card', qList).forEach(updateBadges);
+    $$('.q-text', qList).forEach(grow);
     $('#qCount').textContent = total;
     if (focus) {
       const card = qList.querySelector('[data-qi="' + focus.qi + '"]');
@@ -160,7 +167,7 @@
     const card = e.target.closest('.q-card');
     if (!card) return;
     const q = content.questions[+card.dataset.qi];
-    if (e.target.matches('.q-text')) q.text = e.target.value;
+    if (e.target.matches('.q-text')) { q.text = e.target.value; grow(e.target); }
     else {
       const row = e.target.closest('.ans-row');
       if (!row) return;
