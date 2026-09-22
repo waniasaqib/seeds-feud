@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "branding": {
+    "title": "Family Feud",
+    "edition": "Seeds Congress 2026 Edition",
+    "tagline": "Your decision to make, your action to take.",
+    "surveyLabel": "We surveyed 100 delegates…",
+    "logo": "horizontal",
+    "customLogo": ""
+  },
+  "theme": {
+    "bg": "#061824",
+    "surface": "#0B2D44",
+    "accent": "#4FB06D",
+    "accentLight": "#8AD09B"
+  },
+  "teams": [
+    {
+      "name": "The Sprouts",
+      "color": "#4FB06D"
+    },
+    {
+      "name": "The Saplings",
+      "color": "#F4C95D"
+    }
+  ],
+  "settings": {
+    "sound": true,
+    "strikes": 3,
+    "showPoints": true
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Name something a student leader brings to every meeting.",
+      "multiplier": 1,
+      "answers": [
+        {
+          "text": "Laptop",
+          "points": 31
+        },
+        {
+          "text": "Phone",
+          "points": 22
+        },
+        {
+          "text": "Notebook",
+          "points": 16
+        },
+        {
+          "text": "Coffee",
+          "points": 12
+        },
+        {
+          "text": "Water Bottle",
+          "points": 8
+        },
+        {
+          "text": "Snacks",
+          "points": 6
+        },
+        {
+          "text": "A Pen",
+          "points": 5
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "text": "Name something people do to get ready for a big speech.",
+      "multiplier": 1,
+      "answers": [
+        {
+          "text": "Practice in the Mirror",
+          "points": 34
+        },
+        {
+          "text": "Write Cue Cards",
+          "points": 24
+        },
+        {
+          "text": "Take Deep Breaths",
+          "points": 15
+        },
+        {
+          "text": "Research the Topic",
+          "points": 11
+        },
+        {
+          "text": "Pick an Outfit",
+          "points": 8
+        },
+        {
+          "text": "Drink Water",
+          "points": 5
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "text": "Name a quality every great leader has.",
+      "multiplier": 1,
+      "answers": [
+        {
+          "text": "Confidence",
+          "points": 29
+        },
+        {
+          "text": "Honesty",
+          "points": 21
+        },
+        {
+          "text": "Communication",
+          "points": 18
+        },
+        {
+          "text": "Empathy",
+          "points": 13
+        },
+        {
+          "text": "Vision",
+          "points": 9
+        },
+        {
+          "text": "Patience",
+          "points": 6
+        },
+        {
+          "text": "Sense of Humour",
+          "points": 4
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "text": "Name something you would find at a conference.",
+      "multiplier": 1,
+      "answers": [
+        {
+          "text": "Name Tags",
+          "points": 30
+        },
+        {
+          "text": "Free Food",
+          "points": 26
+        },
+        {
+          "text": "Lanyards",
+          "points": 15
+        },
+        {
+          "text": "Microphone",
+          "points": 12
+        },
+        {
+          "text": "Free Swag",
+          "points": 9
+        },
+        {
+          "text": "Coffee",
+          "points": 5
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "text": "Name a reason a meeting runs late.",
+      "multiplier": 2,
+      "answers": [
+        {
+          "text": "Someone Won't Stop Talking",
+          "points": 36
+        },
+        {
+          "text": "Tech Problems",
+          "points": 22
+        },
+        {
+          "text": "Started Late",
+          "points": 16
+        },
+        {
+          "text": "Going Off Topic",
+          "points": 12
+        },
+        {
+          "text": "Too Many Questions",
+          "points": 8
+        },
+        {
+          "text": "The Food Arrived",
+          "points": 6
+        }
+      ]
+    }
+  ]
+}
