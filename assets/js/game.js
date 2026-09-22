@@ -704,17 +704,18 @@
     content = await F.loadContent('');
     applyContent();
     boardKey = '';
+    if (IS_PREVIEW) game = previewGame();
     render();
   }
 
   if (F.channel) {
     F.channel.addEventListener('message', (e) => {
       const m = e.data || {};
-      if (m.type === 'state' && m.game) {
+      if (m.type === 'state' && m.game && !IS_PREVIEW) {
         game = Object.assign(freshGame(), m.game);
         if (game.phase !== 'faceoff') closeModal('#playPass');
         render();
-      } else if (m.type === 'fx') runFx(m.kind, m.data || {});
+      } else if (m.type === 'fx' && !IS_PREVIEW) runFx(m.kind, m.data || {});
       else if (m.type === 'content') reloadContent();
       else if (m.type === 'board-alive' && !IS_BOARD) {
         const was = Date.now() - boardAliveAt < 5000;
@@ -725,14 +726,36 @@
   }
   addEventListener('storage', (e) => {
     if (e.key === F.KEYS.content) reloadContent();
-    else if (e.key === F.KEYS.game && e.newValue && IS_BOARD) {
+    else if (e.key === F.KEYS.game && e.newValue && IS_BOARD && !IS_PREVIEW) {
       try { game = Object.assign(freshGame(), JSON.parse(e.newValue)); render(); } catch (err) { /* ignore */ }
     }
   });
   if (!IS_BOARD) setInterval(updatePeek, 2500);
 
+  /* Admin live preview: shows a chosen screen with every answer revealed. */
+  let previewTarget = params.get('q') || 'intro';
+  function previewGame() {
+    const g = freshGame();
+    g.scores = [120, 95];
+    if (previewTarget === 'intro') return g;
+    if (previewTarget === 'gameOver') { g.phase = 'gameOver'; g.scores = [245, 180]; return g; }
+    const i = Math.min(+previewTarget || 0, Math.max(0, content.questions.length - 1));
+    const list = F.answersFor(content.questions[i]);
+    Object.assign(g, { phase: 'play', round: i, control: 0, strikes: 1, revealed: list.map(() => true), bank: list.reduce((n, a) => n + a.points, 0) });
+    return g;
+  }
+  if (IS_PREVIEW) {
+    game = previewGame();
+    addEventListener('message', (e) => {
+      if (e.origin !== location.origin || !e.data || e.data.type !== 'preview') return;
+      previewTarget = String(e.data.target);
+      game = previewGame();
+      render();
+    });
+  }
+
   // Clamp a saved game if questions were removed in admin.
-  if (game.round >= content.questions.length && game.phase !== 'intro') {
+  if (!IS_PREVIEW && game.round >= content.questions.length && game.phase !== 'intro') {
     game = freshGame();
   }
 
